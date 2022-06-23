@@ -17,6 +17,7 @@ const renderItems = () => {
 const renderItem = (text) => {
 	const htmlElement = itemTemplate.cloneNode(true);
 	htmlElement.querySelector('.item__text').textContent = text;
+	setEventListeners(htmlElement);
 
 	list.append(htmlElement)
 }
@@ -25,6 +26,14 @@ const handleSubmit = () => {
 	renderItem(formInput.value);
 }
 
+function handleDelete(evt) {
+	evt.target.closest('.list__item').remove();
+}
+
+function setEventListeners(htmlElement) {
+	const deleteButton = htmlElement.querySelector('.delete');
+	deleteButton.addEventListener('click', handleDelete);
+}
 
 formButton.addEventListener('click', handleSubmit)
 
